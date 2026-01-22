@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --primary: #007bff;
+  --primary-hover: #0062cc;
+  --background-light: #f5f7f8;
+  --background-dark: #0f1923;
+  --background-darker: #091016;
+  --slate-card: #1e293b;
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-bg: rgba(30, 41, 59, 0.4);
+}
+
+html {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  height: auto;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  @apply bg-background-light dark:bg-background-dark text-slate-900 dark:text-white;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* Custom Utilities for the Stack Effect */
+.glass-card {
+  background: rgba(30, 41, 59, 0.3);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.stack-container {
+  perspective: 1000px;
+}
+
+.stack-layer {
+  transition: all 0.5s ease-out;
+  transform-style: preserve-3d;
+}
+
+.stack-container:hover .stack-layer-1 {
+  transform: translateY(-20px) translateZ(0px) rotateX(2deg);
+}
+
+.stack-container:hover .stack-layer-2 {
+  transform: translateY(-10px) translateX(15px) translateZ(-20px) rotateZ(2deg);
+}
+
+.stack-container:hover .stack-layer-3 {
+  transform: translateY(0px) translateX(-15px) translateZ(-40px) rotateZ(-2deg);
+}
+
+/* Initial States */
+.stack-layer-1 {
+  z-index: 30;
+  transform: translateY(0);
+}
+
+.stack-layer-2 {
+  z-index: 20;
+  transform: translateY(15px) scale(0.95);
+  opacity: 0.7;
+}
+
+.stack-layer-3 {
+  z-index: 10;
+  transform: translateY(30px) scale(0.9);
+  opacity: 0.4;
+}
+
+/* Animated Grid Background */
+@keyframes grid-move {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(64px);
+  }
+}
+
+.animated-grid {
+  background-size: 64px 64px;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, #000 70%, transparent 100%);
+  animation: grid-move 5s linear infinite;
+}
+
+/* Scrollbar hide for clean UI */
+::-webkit-scrollbar {
+  width: 10px !important;
+  display: block !important;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f1923 !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #20354b !important;
+  border-radius: 10px !important;
+  border: 2px solid #0f1923 !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #007bff !important;
+}
+
+@theme {
+  --color-primary: #007bff;
+  --color-primary-hover: #0062cc;
+  --color-background-light: #f5f7f8;
+  --color-background-dark: #0f1923;
+  --color-background-darker: #091016;
+  --color-slate-card: #1e293b;
+  --color-glass-border: rgba(255, 255, 255, 0.1);
+  --color-glass-bg: rgba(30, 41, 59, 0.4);
+
+  --font-display: Inter, sans-serif;
+  --font-tight: Inter Tight, sans-serif;
+  --font-body: Inter, sans-serif;
+}
